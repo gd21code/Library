@@ -5,13 +5,14 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.id = crypto.randomUUID;
+    this.id = crypto.randomUUID();
 }
 
 let bookBtn = document.querySelector('#book-btn');
 bookBtn.addEventListener('click', function() {
     let newBookForm = document.querySelector('#book-form');
     newBookForm.style.display = 'block';
+
 });
 
 function addBookToLibrary() {
@@ -45,9 +46,21 @@ function displayCard() {
         let book = myLibrary[i];
         card.classList.add('library-book');
         library.appendChild(card);
-        card.textContent =  `Title: ${book.title}\nAuthor: ${book.author}\nPages:\n${book.pages} Read: ${book.read}`;
+        card.textContent =  `Title: ${book.title} Author: ${book.author} Pages:${book.pages} Read: ${book.read}`;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.classList.add('removeBtn');
+        removeBtn.textContent = 'Remove';
+        card.appendChild(removeBtn);
+        card.dataset.id = book.id;
+        removeBtn.addEventListener("click", () => {
+            const id = card.dataset.id;
+            const index = myLibrary.findIndex(book => book.id === id);
+            console.log(index);
+            myLibrary.splice(index, 1);
+            displayCard();
+        });
     }
 }
 
-// add button functionality on newly created book cards that allow deletion 
-// from list
+// button functionality for toggling read status needed
