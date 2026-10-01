@@ -9,6 +9,9 @@ body {
 
 h1 {
     text-align: center;
+    font-family: Tahoma, sans-serif;
+    color: white;
+    font-size: 40px;
 }
 
 /* new book entry space */
@@ -40,7 +43,7 @@ h1 {
     margin: auto;
     border: 2px solid black;
     font-size: 24px;
-    width: 400px;
+    width: 250px;
 }
 
 #book-form div {
@@ -59,9 +62,11 @@ h1 {
 
 .library-book {
     width: 200px;
-    height: 70px;
     border: 2px solid black;
     background-color: #096e5c;
     margin: 0 auto 10px;;
-    color: white;    
+    color: white;
+    display: flex;
+    flex-direction: column;
+    white-space: pre-line;
 }
