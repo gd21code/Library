@@ -1,5 +1,6 @@
 const myLibrary = [];
 
+// book initialization
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -31,8 +32,9 @@ document.querySelector('#book-form').addEventListener('submit', function(event) 
     addBookToLibrary();
 });
 
+// hide button function
 let hideBookBtn = document.querySelector('#submit-btn');
-hideBookBtn.addEventListener('click', function() {
+hideBookBtn.addEventListener('click', function () {
     let newBookForm = document.querySelector('#book-form');
     newBookForm.style.display = 'none';
 });
@@ -46,14 +48,33 @@ function displayCard() {
         let book = myLibrary[i];
         card.classList.add('library-book');
         library.appendChild(card);
-        card.textContent =  `Title: ${book.title} Author: ${book.author} Pages:${book.pages} Read: ${book.read}`;
+        card.textContent =  `Title: ${book.title}\n Author: ${book.author}\n Pages: ${book.pages}`;
 
+        // code area for read toggle button
+        Book.prototype.readToggle = function () {
+            this.read = !this.read
+        }
+
+        const readBtn = document.createElement('button');
+        readBtn.classList.add('readBtn');
+        readBtn.textContent = `${book.read ? "Read" : "Not Read"}`;
+        card.appendChild(readBtn);
+        readBtn.addEventListener("click", function () {
+            book.readToggle();
+            if (book.read === true) {
+                readBtn.textContent = 'Read';
+            } else {
+                readBtn.textContent = 'Not Read';
+            }
+        });
+
+        // remove button function
         const removeBtn = document.createElement('button');
         removeBtn.classList.add('removeBtn');
         removeBtn.textContent = 'Remove';
         card.appendChild(removeBtn);
         card.dataset.id = book.id;
-        removeBtn.addEventListener("click", () => {
+        removeBtn.addEventListener("click", function () {
             const id = card.dataset.id;
             const index = myLibrary.findIndex(book => book.id === id);
             console.log(index);
@@ -62,5 +83,3 @@ function displayCard() {
         });
     }
 }
-
-// button functionality for toggling read status needed
